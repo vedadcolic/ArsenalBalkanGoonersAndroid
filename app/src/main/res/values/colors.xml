@@ -1,0 +1,15 @@
+<resources>
+
+    <color name="myPrimaryColor">#B82E48</color>
+    <color name="myPrimaryDarkColor">#8B2338</color>
+    <color name="myAccentColor">#FF4081</color>
+    <color name="myDrawerBackgroundTop">#1F2227</color>
+    <color name="myDrawerBackground">#2E323A</color>
+    <color name="myWindowBackground">#8B2338</color>
+    <color name="myTextPrimaryColor">#FFF</color>
+    <color name="myNavigationColor">#8B2338</color>
+
+    <drawable name="pressed_gray">#0c000000</drawable>
+    <drawable name="selected_gray">#2c000000</drawable>
+
+</resources>

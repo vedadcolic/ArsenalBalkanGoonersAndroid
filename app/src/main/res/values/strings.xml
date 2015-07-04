@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Arsenal Balkan Gooners</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="action_settings">Settings</string>
+    <string name="naslovna">Naslovna</string>
+    <string name="vijesti">Vijesti</string>
+    <string name="utakmice">Utakmice</string>
+    <string name="tim">Tim</string>
+    <string name="transferi">Transferi</string>
+    <string name="ostalo">Ostalo</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
