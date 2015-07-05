@@ -22,8 +22,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +68,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +117,8 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     public DrawerLayout getDrawerLayout() {
         return mDrawerLayout;
     }
+
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {

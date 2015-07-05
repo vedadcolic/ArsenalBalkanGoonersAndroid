@@ -11,12 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 public class StatsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String TAG = "stats";
 
     WebView webView;
     SwipeRefreshLayout swipeRefreshLayout;
+    ProgressBar progressBar;
 
     @Nullable
     @Override

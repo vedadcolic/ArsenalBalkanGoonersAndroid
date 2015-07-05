@@ -32,13 +32,16 @@
 
             </android.support.v4.widget.SwipeRefreshLayout>
 
+
         </FrameLayout>
     </LinearLayout>
-    <!-- android:layout_marginTop="?android:attr/actionBarSize"-->
     <gooners.balkan.arsenal.arsenalbalkangoonersandroid.ScrimInsetsFrameLayout
         android:id="@+id/scrimInsetsFrameLayout"
-        android:layout_width="@dimen/navigation_drawer_width" android:layout_height="wrap_content"
-        android:fitsSystemWindows="true" android:layout_gravity="start" app:insetForeground="#4000"
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:layout_gravity="start"
+        app:insetForeground="#4000"
         android:elevation="10dp">
 
         <fragment android:id="@+id/fragment_drawer"

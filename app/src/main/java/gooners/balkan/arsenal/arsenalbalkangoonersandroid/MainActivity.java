@@ -1,5 +1,6 @@
 package gooners.balkan.arsenal.arsenalbalkangoonersandroid;
 
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerCallbacks, SwipeRefreshLayout.OnRefreshListener {
 
@@ -27,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         setContentView(R.layout.activity_main);
 
         webView = (WebView) findViewById(R.id.webViewMain);
-        webView.loadUrl("http://192.168.0.100:3000/");
+        webView.loadUrl("http://192.168.0.100/arsenal");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAppCacheEnabled(false);
         webView.setWebViewClient(new WebViewClient()) ;
@@ -42,12 +44,14 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
+
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.fragment_drawer);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
     }
+
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -88,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -96,11 +101,35 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_filter) {
+            webView = (WebView) findViewById(R.id.webViewMain);
+            webView.loadUrl("http://192.168.0.100/arsenal");
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setAppCacheEnabled(false);
+            webView.setWebViewClient(new WebViewClient()) ;
+            webView.getSettings().setGeolocationEnabled(false);
+            webView.getSettings().setLoadsImagesAutomatically(true);
+            webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+            webView.setBackgroundColor(Color.parseColor("#8B2338"));
+            return true;
+
+        }
+
+        if (id == R.id.action_search) {
+            webView = (WebView) findViewById(R.id.webViewMain);
+            webView.loadUrl("http://192.168.0.100/arse");
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.getSettings().setAppCacheEnabled(false);
+            webView.setWebViewClient(new WebViewClient()) ;
+            webView.getSettings().setGeolocationEnabled(false);
+            webView.getSettings().setLoadsImagesAutomatically(true);
+            webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+            webView.setBackgroundColor(Color.parseColor("#8B2338"));
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }
