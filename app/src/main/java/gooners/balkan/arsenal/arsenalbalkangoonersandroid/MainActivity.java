@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.SwipeBoja1, R.color.SwipeBoja2, R.color.SwipeBoja3, R.color.SwipeBoja4);
+        swipeRefreshLayout.setColorSchemeResources(R.color.swipeboja1, R.color.swipeboja2, R.color.swipeboja3, R.color.swipeboja4);
 
         webView = (WebView) findViewById(R.id.webViewMain);
         webView.loadUrl("http://192.168.0.100/arsenal/index.html");
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
                     }
                 });
+
                 AlertDialog alert=builder.create();
                 alert.show();
             }
@@ -73,14 +74,11 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
 
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.fragment_drawer);
 
-        // Set up the drawer.
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
     }
-
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
@@ -122,10 +120,9 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
             getMenuInflater().inflate(R.menu.main, menu);
             return true;
         }
+
         return super.onCreateOptionsMenu(menu);
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
