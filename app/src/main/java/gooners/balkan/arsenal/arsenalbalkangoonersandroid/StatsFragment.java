@@ -11,14 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 
 public class StatsFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String TAG = "stats";
 
     WebView webView;
     SwipeRefreshLayout swipeRefreshLayout;
-    ProgressBar progressBar;
 
     @Nullable
     @Override
@@ -32,7 +30,7 @@ public class StatsFragment extends Fragment implements SwipeRefreshLayout.OnRefr
         super.onActivityCreated(savedInstanceState);
 
         webView = (WebView) getView().findViewById(R.id.webView);
-        webView.loadUrl("http://192.168.0.100/arsenal");
+        webView.loadUrl("http://www.freebitgames.com/vedad/");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAppCacheEnabled(false);
         webView.setWebViewClient(new WebViewClient()) ;

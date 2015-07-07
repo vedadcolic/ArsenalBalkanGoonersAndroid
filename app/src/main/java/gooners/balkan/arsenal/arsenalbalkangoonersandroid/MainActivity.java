@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         swipeRefreshLayout.setColorSchemeResources(R.color.swipeboja1, R.color.swipeboja2, R.color.swipeboja3, R.color.swipeboja4);
 
         webView = (WebView) findViewById(R.id.webViewMain);
-        webView.loadUrl("http://192.168.0.100/arsenal/index.html");
+        webView.loadUrl("http://www.freebitgames.com/vedad/");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAppCacheEnabled(false);
         webView.setWebViewClient(new WebViewClient()) ;
@@ -111,6 +112,24 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         } else
 
             super.onBackPressed();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(event.getAction() == KeyEvent.ACTION_DOWN){
+            switch(keyCode)
+            {
+                case KeyEvent.KEYCODE_BACK:
+                    if(webView.canGoBack()){
+                        webView.goBack();
+                    }else{
+                        finish();
+                    }
+                    return true;
+            }
+
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
