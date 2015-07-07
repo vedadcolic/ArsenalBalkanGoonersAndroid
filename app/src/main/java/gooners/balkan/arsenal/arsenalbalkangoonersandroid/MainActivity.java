@@ -1,19 +1,21 @@
 package gooners.balkan.arsenal.arsenalbalkangoonersandroid;
 
-
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerCallbacks, SwipeRefreshLayout.OnRefreshListener {
 
@@ -28,8 +30,12 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.SwipeBoja1, R.color.SwipeBoja2, R.color.SwipeBoja3, R.color.SwipeBoja4);
+
         webView = (WebView) findViewById(R.id.webViewMain);
-        webView.loadUrl("http://192.168.0.100/arsenal");
+        webView.loadUrl("http://192.168.0.100/arsenal/index.html");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setAppCacheEnabled(false);
         webView.setWebViewClient(new WebViewClient()) ;
@@ -37,9 +43,32 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
         webView.getSettings().setLoadsImagesAutomatically(true);
         webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         webView.setBackgroundColor(Color.parseColor("#8B2338"));
+        webView.setWebViewClient(new WebViewClient() {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                if (errorCode == -2) {
+                    view.loadData("", "", null);
+                }
 
-        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe);
-        swipeRefreshLayout.setOnRefreshListener(this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setCancelable(false);
+                builder.setTitle(Html.fromHtml("<font color='#B82E48'><b>NEMATE KONEKCIJE</b></font>"));
+                builder.setMessage(Html.fromHtml("<font color='#2E323A'>Molimo konektujte se na internet i pokušajte ponovo.</font>"));
+                builder.setPositiveButton(Html.fromHtml("<font color='#2E323A'><b>POKUŠAJTE PONOVO</b></font>"), new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.putExtra("EXIT", true);
+                        startActivity(intent);
+
+                    }
+                });
+                AlertDialog alert=builder.create();
+                alert.show();
+            }
+        });
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
@@ -76,16 +105,20 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     public void onBackPressed() {
         if (mNavigationDrawerFragment.isDrawerOpen())
             mNavigationDrawerFragment.closeDrawer();
-        else
+
+        else if (mNavigationDrawerFragment.isDrawerOpen() && webView.canGoBack()) {
+
+            webView.goBack();
+
+        } else
+
             super.onBackPressed();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
+
             getMenuInflater().inflate(R.menu.main, menu);
             return true;
         }
@@ -93,29 +126,13 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
     }
 
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_filter) {
-            webView = (WebView) findViewById(R.id.webViewMain);
-            webView.loadUrl("http://192.168.0.100/arsenal");
-            webView.getSettings().setJavaScriptEnabled(true);
-            webView.getSettings().setAppCacheEnabled(false);
-            webView.setWebViewClient(new WebViewClient()) ;
-            webView.getSettings().setGeolocationEnabled(false);
-            webView.getSettings().setLoadsImagesAutomatically(true);
-            webView.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
-            webView.setBackgroundColor(Color.parseColor("#8B2338"));
-            return true;
-
-        }
-
-        if (id == R.id.action_search) {
             webView = (WebView) findViewById(R.id.webViewMain);
             webView.loadUrl("http://192.168.0.100/arse");
             webView.getSettings().setJavaScriptEnabled(true);
@@ -130,6 +147,5 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerC
 
         return super.onOptionsItemSelected(item);
     }
-
 
 }
